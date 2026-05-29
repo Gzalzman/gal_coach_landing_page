@@ -3,21 +3,25 @@ import { BenefitsSection } from '@/components/BenefitsSection'
 import { CTASection } from '@/components/CTASection'
 import { FAQSection } from '@/components/FAQSection'
 import { Hero } from '@/components/Hero'
-import { PainSection } from '@/components/PainSection'
+import { SectionNav } from '@/components/SectionNav'
+import { WhereChangeBegins } from '@/components/WhereChangeBegins'
 import { ProcessSection } from '@/components/ProcessSection'
-import { WhatIsCoaching } from '@/components/WhatIsCoaching'
 import { WhoThisIsFor } from '@/components/WhoThisIsFor'
+import { WorkWithMe } from '@/components/WorkWithMe'
+import { WordsFromTheWay } from '@/components/WordsFromTheWay'
 import { Footer } from '@/components/Footer'
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <PainSection />
-      <WhatIsCoaching />
-      <WhoThisIsFor />
-      <AboutGal />
+      <SectionNav />
+      <WhereChangeBegins />
       <ProcessSection />
+      <WhoThisIsFor />
+      <WorkWithMe />
+      <WordsFromTheWay />
+      <AboutGal />
       <BenefitsSection />
       <CTASection />
       <FAQSection />

@@ -3,7 +3,7 @@ import { copy } from '@/lib/constants'
 
 export const PainSection = () => {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="bg-white px-4 pt-2 pb-8 md:py-16">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">

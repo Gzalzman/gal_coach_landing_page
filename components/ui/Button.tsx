@@ -14,8 +14,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles =
       variant === 'secondary'
-        ? 'bg-white text-accent-teal border-2 border-accent-teal hover:bg-accent-teal hover:text-white active:bg-accent-teal-dark'
-        : 'bg-accent-teal text-white hover:bg-accent-teal-dark active:bg-accent-teal-dark'
+        ? 'bg-white text-[#2F5A4F] border-2 border-[#2F5A4F] hover:bg-[#F3EEE6] active:bg-[#F3EEE6]'
+        : 'bg-[#2F5A4F] text-white hover:bg-[#23443C] active:bg-[#23443C]'
 
     const sizeStyles =
       size === 'lg'
