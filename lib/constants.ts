@@ -20,10 +20,21 @@ export const getCompatibilityLink = () => {
   return `https://wa.me/972528330884?text=${message}`
 }
 
+export const navItems = [
+  { label: 'קצת עליי', href: '#about' },
+  { label: 'מה עוצר אותך?', href: '#pain' },
+  { label: 'איך זה עובד?', href: '#process' },
+  { label: 'למי זה מתאים?', href: '#fit' },
+  { label: 'אפשרויות עבודה', href: '#work-with-me' },
+  { label: 'מילים מהדרך', href: '#testimonials' },
+  { label: 'מה מקבלים?', href: '#benefits' },
+  { label: 'שאלות נפוצות', href: '#faq' },
+]
+
 export const copy = {
   heroEyebrow: 'גל זלצמן | מאמן אישי מוסמך',
-  heroTitle: 'אני לא מאמן את הנושא.\n אני מאמן את האדם שפוגש אותו.',
-  heroSubtitle: 'קריירה, זוגיות, קבלת החלטות או תחושת תקיעות הם הרבה פעמים רק השער. בתהליך אנחנו פוגשים את האדם שמאחורי הנושא — את הקולות, הפחדים והבחירות שמבקשים מקום חדש.',
+  heroTitle: 'אני מאמן את האדם שמאחורי הבחירות.\nשם מתחיל השינוי האמיתי.',
+  heroSubtitle: 'לא עוד פתרונות מוכנים מבחוץ, אלא תהליך שמאפשר לזהות מה מנהל אותך מבפנים — ולפעול מתוך הערכים שלך, גם ברגעים שבהם האוטומט משתלט.',
   heroCTAPrimary: 'בואו נבדוק התאמה',
   heroCTASecondary: 'שלחו לי הודעה',
 

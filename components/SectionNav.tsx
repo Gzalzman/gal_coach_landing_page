@@ -1,13 +1,4 @@
-const navItems = [
-  { label: 'מה עוצר אותך?', href: '#pain' },
-  { label: 'איך זה עובד?', href: '#process' },
-  { label: 'למי זה מתאים?', href: '#fit' },
-  { label: 'אפשרויות עבודה', href: '#work-with-me' },
-  { label: 'מילים מהדרך', href: '#testimonials' },
-  { label: 'קצת עליי', href: '#about' },
-  { label: 'מה מקבלים?', href: '#benefits' },
-  { label: 'שאלות נפוצות', href: '#faq' },
-]
+import { navItems } from '@/lib/constants'
 
 export const SectionNav = () => (
   <section id="section-nav" className="bg-white px-2 pb-4 md:px-0">

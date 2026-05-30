@@ -1,13 +1,47 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import { Button } from './ui/Button'
-import { copy, getWhatsAppLink, getCompatibilityLink } from '@/lib/constants'
+import { copy, getWhatsAppLink, getCompatibilityLink, navItems } from '@/lib/constants'
 
 export const Hero = () => {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <section className="bg-white px-2 py-4 md:py-4">
-      <div className="mx-auto w-full max-w-[1280px] px-1 md:w-[75%] md:px-0">
+      <div className="relative mx-auto w-full max-w-[1280px] px-1 md:w-[75%] md:px-0">
+
+        {/* Hamburger menu */}
+        <div className="absolute right-4 top-4 z-50">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'סגירת תפריט' : 'פתיחת תפריט'}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-[#2F5A4F] shadow-sm backdrop-blur-sm transition hover:bg-white"
+          >
+            {menuOpen ? <FaTimes className="h-4 w-4" /> : <FaBars className="h-4 w-4" />}
+          </button>
+
+          {menuOpen && (
+            <div
+              className="absolute right-0 top-12 min-w-[180px] rounded-2xl border border-[#E6D8C8] bg-white/95 py-2 shadow-md"
+              dir="rtl"
+            >
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-5 py-2.5 text-sm font-medium text-[#2F5A4F] transition hover:bg-[#F7F4EF]"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="relative overflow-hidden rounded-[32px] bg-[#f7f4ef] md:min-h-[580px]">
           {/* Desktop image */}
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[72%] items-end justify-end md:flex">
@@ -39,7 +73,7 @@ export const Hero = () => {
               {copy.heroEyebrow}
             </p>
 
-            <h1 className="mb-6 text-right text-3xl font-bold leading-tight text-text-primary lg:text-4xl xl:text-[44px]">
+            <h1 className="mb-6 whitespace-pre-line text-right text-3xl font-bold leading-tight text-text-primary lg:text-4xl xl:text-[44px]">
               {copy.heroTitle}
             </h1>
 
@@ -80,7 +114,7 @@ export const Hero = () => {
       {copy.heroEyebrow}
     </p>
 
-    <h1 className="mt-4 text-[25px] font-bold leading-[1.18] text-text-primary">
+    <h1 className="mt-4 whitespace-pre-line text-[25px] font-bold leading-[1.18] text-text-primary">
       {copy.heroTitle}
     </h1>
 
