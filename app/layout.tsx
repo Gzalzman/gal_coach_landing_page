@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://galzaltzman.co.il" />
       </head>
       <body>{children}</body>
+      <GoogleAnalytics gaId="G-2JWJBKS8GH" />
     </html>
   )
 }
