@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { MobileSectionDivider } from './ui/MobileSectionDivider'
 import { BackToSectionNav } from './ui/BackToSectionNav'
 
@@ -43,15 +43,39 @@ const breathworkDetailParagraphs = [
   'כדי להישאר מעודכנים במועדים הקרובים, כדאי לעקוב אחריי או לשלוח הודעה ולקבל פרטים על הסדנה הבאה.',
 ]
 
+type ActiveOption = 'coaching' | 'group' | 'breathwork' | null
+
 export const WorkWithMe = () => {
-  const [expanded, setExpanded] = useState(false)
-  const [expandedGroup, setExpandedGroup] = useState(false)
-  const [expandedBreathwork, setExpandedBreathwork] = useState(false)
+  const [active, setActive] = useState<ActiveOption>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  const toggle = (option: Exclude<ActiveOption, null>) => {
+    if (active === option) {
+      setActive(null)
+    } else {
+      setActive(option)
+      setTimeout(() => {
+        panelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 80)
+    }
+  }
+
+  const detailBtnLabel = (opt: Exclude<ActiveOption, null>) =>
+    active === opt ? '↑ סגור פרטים' : '↓ לפרטים'
+
+  const cardBorder = (opt: Exclude<ActiveOption, null>) =>
+    active === opt ? 'border-[#2F5A4F]' : 'border-[#E6D8C8]'
+
+  const detailBtnColor = (opt: Exclude<ActiveOption, null>) =>
+    `mt-3 md:mt-4 text-sm font-medium text-right transition hover:opacity-70 ${
+      active === opt ? 'text-[#183B3B]' : 'text-[#2F5A4F]'
+    }`
 
   return (
     <section id="work-with-me" className="bg-white px-4 pt-2 pb-8 md:py-16">
       <MobileSectionDivider />
       <div className="mt-6 md:mt-0 max-w-6xl mx-auto">
+
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-[28px] md:text-4xl font-bold text-text-primary leading-tight">
             איך אפשר לעבוד איתי?
@@ -61,305 +85,204 @@ export const WorkWithMe = () => {
           </p>
         </div>
 
-        {/* ── Mobile ── */}
+        {/* ── Mobile cards ── */}
         <div className="space-y-3 md:hidden" dir="rtl">
 
-          {/* Personal coaching card */}
-          <div className="rounded-2xl border border-[#E6D8C8] bg-[#FBF7F1] px-5 py-5">
+          <div className={`rounded-2xl border bg-[#FBF7F1] px-5 py-5 transition-colors ${cardBorder('coaching')}`}>
             <h3 className="text-[17px] font-semibold text-text-primary leading-snug">
               אימון אישי 1:1
             </h3>
             <p className="mt-1 text-text-secondary text-[14px] leading-relaxed">
               תהליך אישי ומעמיק למי שמרגיש תקיעות, עומס, צומת החלטה או רצון ליצור שינוי אמיתי מבפנים.
             </p>
-
-            {expanded && (
-              <div className="mt-4 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {coachingDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[14px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[14px] font-semibold text-text-primary mb-1">מבנה התהליך:</p>
-                  <p className="text-[14px] text-text-secondary">10 מפגשים שבועיים | כשעה כל מפגש</p>
-                  <p className="mt-3 text-[14px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">3,900 ₪ לתהליך</p>
-                  <p className="mt-3 text-[13px] text-text-secondary leading-6">
-                    אם נחליט יחד שיש צורך בהמשך:<br />
-                    מפגש 11 ללא עלות<br />
-                    מפגש 12 בחצי מחיר
-                  </p>
-                </div>
-
-                <a
-                  href={COACHING_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  בדיקת התאמה לאימון אישי
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpanded(!expanded)}
-              className="mt-3 text-sm font-medium text-[#2F5A4F] transition hover:opacity-70"
-            >
-              {expanded ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('coaching')} className={detailBtnColor('coaching')}>
+              {detailBtnLabel('coaching')}
             </button>
           </div>
 
-          {/* Group coaching card */}
-          <div className="rounded-2xl border border-[#E6D8C8] bg-[#FBF7F1] px-5 py-5">
+          <div className={`rounded-2xl border bg-[#FBF7F1] px-5 py-5 transition-colors ${cardBorder('group')}`}>
             <h3 className="text-[17px] font-semibold text-text-primary leading-snug">
               אימון קבוצתי
             </h3>
             <p className="mt-1 text-text-secondary text-[14px] leading-relaxed">
               תהליך עומק בקבוצה קטנה, למי שרוצה לעבור דרך אישית בתוך מרחב משותף, תומך ומחייב — ולגלות שהוא לא לבד בתוך התקיעות, הפחדים והצורך בשינוי.
             </p>
-
-            {expandedGroup && (
-              <div className="mt-4 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {groupCoachingDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[14px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[14px] font-semibold text-text-primary mb-2">מבנה התהליך:</p>
-                  <p className="text-[14px] text-text-secondary leading-7">
-                    8 מפגשים אונליין<br />
-                    קבוצה קטנה ואינטימית<br />
-                    תהליך חי ומונחה<br />
-                    עבודה עם דפוסים, קולות פנימיים, ערכים ובחירה
-                  </p>
-                  <p className="mt-3 text-[14px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">1,590 ₪ לתהליך</p>
-                </div>
-
-                <a
-                  href={GROUP_COACHING_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  בדיקת התאמה לאימון קבוצתי
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpandedGroup(!expandedGroup)}
-              className="mt-3 text-sm font-medium text-[#2F5A4F] transition hover:opacity-70"
-            >
-              {expandedGroup ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('group')} className={detailBtnColor('group')}>
+              {detailBtnLabel('group')}
             </button>
           </div>
 
-          {/* Breathwork card */}
-          <div className="rounded-2xl border border-[#E6D8C8] bg-[#FBF7F1] px-5 py-5">
+          <div className={`rounded-2xl border bg-[#FBF7F1] px-5 py-5 transition-colors ${cardBorder('breathwork')}`}>
             <h3 className="text-[17px] font-semibold text-text-primary leading-snug">
               סדנאות נשימה / ריברסינג
             </h3>
             <p className="mt-1 text-text-secondary text-[14px] leading-relaxed">
               מרחב חווייתי לעבודה עם הגוף, הנשימה ומה שנמצא מתחת למילים — למי שרוצה לעצור, להרפות עומס פנימי, ולהקשיב למה שהגוף מבקש לומר.
             </p>
-
-            {expandedBreathwork && (
-              <div className="mt-4 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {breathworkDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[14px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[14px] font-semibold text-text-primary mb-2">מבנה ועלות:</p>
-                  <p className="text-[14px] text-text-secondary leading-7">
-                    סדנה חד־פעמית / לפי מועד שמתפרסם מראש<br />
-                    נשימה מעגלית מונחית<br />
-                    מרחב קבוצתי בטוח ומוחזק<br />
-                    לעיתים בשילוב כלים משלימים כמו סאונד הילינג
-                  </p>
-                  <p className="mt-3 text-[14px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">
-                    בדרך כלל בין 180–250 ₪ למשתתף, בהתאם לסדנה, למיקום ולשיתוף הפעולה.
-                  </p>
-                </div>
-
-                <a
-                  href={BREATHWORK_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  לקבלת פרטים על סדנת נשימה
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpandedBreathwork(!expandedBreathwork)}
-              className="mt-3 text-sm font-medium text-[#2F5A4F] transition hover:opacity-70"
-            >
-              {expandedBreathwork ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('breathwork')} className={detailBtnColor('breathwork')}>
+              {detailBtnLabel('breathwork')}
             </button>
           </div>
+
         </div>
 
-        {/* ── Desktop ── */}
+        {/* ── Desktop cards ── */}
         <div className="hidden md:grid gap-6 md:grid-cols-3 items-start" dir="rtl">
 
-          {/* Personal coaching card */}
-          <div className="flex flex-col rounded-3xl border border-[#E6D8C8] bg-[#FBF7F1] p-6 shadow-sm">
+          <div className={`flex flex-col rounded-3xl border bg-[#FBF7F1] p-6 shadow-sm transition-colors ${cardBorder('coaching')}`}>
             <h3 className="text-xl font-semibold text-text-primary">אימון אישי 1:1</h3>
             <p className="mt-3 text-text-secondary text-[15px] leading-relaxed">
               תהליך אישי ומעמיק למי שמרגיש תקיעות, עומס, צומת החלטה או רצון ליצור שינוי אמיתי מבפנים.
             </p>
-
-            {expanded && (
-              <div className="mt-5 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {coachingDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[15px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[15px] font-semibold text-text-primary mb-1">מבנה התהליך:</p>
-                  <p className="text-[14px] text-text-secondary">10 מפגשים שבועיים | כשעה כל מפגש</p>
-                  <p className="mt-3 text-[15px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">3,900 ₪ לתהליך</p>
-                  <p className="mt-3 text-[13px] text-text-secondary leading-6">
-                    אם נחליט יחד שיש צורך בהמשך:<br />
-                    מפגש 11 ללא עלות<br />
-                    מפגש 12 בחצי מחיר
-                  </p>
-                </div>
-
-                <a
-                  href={COACHING_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  בדיקת התאמה לאימון אישי
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpanded(!expanded)}
-              className="mt-4 text-sm font-medium text-[#2F5A4F] text-right transition hover:opacity-70"
-            >
-              {expanded ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('coaching')} className={detailBtnColor('coaching')}>
+              {detailBtnLabel('coaching')}
             </button>
           </div>
 
-          {/* Group coaching card */}
-          <div className="flex flex-col rounded-3xl border border-[#E6D8C8] bg-[#FBF7F1] p-6 shadow-sm">
+          <div className={`flex flex-col rounded-3xl border bg-[#FBF7F1] p-6 shadow-sm transition-colors ${cardBorder('group')}`}>
             <h3 className="text-xl font-semibold text-text-primary">אימון קבוצתי</h3>
             <p className="mt-3 text-text-secondary text-[15px] leading-relaxed">
               תהליך עומק בקבוצה קטנה, למי שרוצה לעבור דרך אישית בתוך מרחב משותף, תומך ומחייב — ולגלות שהוא לא לבד בתוך התקיעות, הפחדים והצורך בשינוי.
             </p>
-
-            {expandedGroup && (
-              <div className="mt-5 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {groupCoachingDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[15px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[15px] font-semibold text-text-primary mb-2">מבנה התהליך:</p>
-                  <p className="text-[14px] text-text-secondary leading-7">
-                    8 מפגשים אונליין<br />
-                    קבוצה קטנה ואינטימית<br />
-                    תהליך חי ומונחה<br />
-                    עבודה עם דפוסים, קולות פנימיים, ערכים ובחירה
-                  </p>
-                  <p className="mt-3 text-[15px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">1,590 ₪ לתהליך</p>
-                </div>
-
-                <a
-                  href={GROUP_COACHING_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  בדיקת התאמה לאימון קבוצתי
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpandedGroup(!expandedGroup)}
-              className="mt-4 text-sm font-medium text-[#2F5A4F] text-right transition hover:opacity-70"
-            >
-              {expandedGroup ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('group')} className={detailBtnColor('group')}>
+              {detailBtnLabel('group')}
             </button>
           </div>
 
-          {/* Breathwork card */}
-          <div className="flex flex-col rounded-3xl border border-[#E6D8C8] bg-[#FBF7F1] p-6 shadow-sm">
+          <div className={`flex flex-col rounded-3xl border bg-[#FBF7F1] p-6 shadow-sm transition-colors ${cardBorder('breathwork')}`}>
             <h3 className="text-xl font-semibold text-text-primary">סדנאות נשימה / ריברסינג</h3>
             <p className="mt-3 text-text-secondary text-[15px] leading-relaxed">
               מרחב חווייתי לעבודה עם הגוף, הנשימה ומה שנמצא מתחת למילים — למי שרוצה לעצור, להרפות עומס פנימי, ולהקשיב למה שהגוף מבקש לומר.
             </p>
-
-            {expandedBreathwork && (
-              <div className="mt-5 rounded-2xl border border-[#E6D8C8] bg-[#F7F4EF] p-5 space-y-4">
-                {breathworkDetailParagraphs.map((para, i) => (
-                  <p key={i} className="text-text-secondary text-[15px] leading-8">
-                    {para}
-                  </p>
-                ))}
-
-                <div className="rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
-                  <p className="text-[15px] font-semibold text-text-primary mb-2">מבנה ועלות:</p>
-                  <p className="text-[14px] text-text-secondary leading-7">
-                    סדנה חד־פעמית / לפי מועד שמתפרסם מראש<br />
-                    נשימה מעגלית מונחית<br />
-                    מרחב קבוצתי בטוח ומוחזק<br />
-                    לעיתים בשילוב כלים משלימים כמו סאונד הילינג
-                  </p>
-                  <p className="mt-3 text-[15px] font-semibold text-text-primary mb-1">עלות:</p>
-                  <p className="text-[14px] text-text-secondary">
-                    בדרך כלל בין 180–250 ₪ למשתתף, בהתאם לסדנה, למיקום ולשיתוף הפעולה.
-                  </p>
-                </div>
-
-                <a
-                  href={BREATHWORK_WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840]"
-                >
-                  לקבלת פרטים על סדנת נשימה
-                </a>
-              </div>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setExpandedBreathwork(!expandedBreathwork)}
-              className="mt-4 text-sm font-medium text-[#2F5A4F] text-right transition hover:opacity-70"
-            >
-              {expandedBreathwork ? '↑ סגור פרטים' : '↓ לפרטים'}
+            <button type="button" onClick={() => toggle('breathwork')} className={detailBtnColor('breathwork')}>
+              {detailBtnLabel('breathwork')}
             </button>
           </div>
 
+        </div>
+
+        {/* ── Shared detail panel (spans full width) ── */}
+        <div
+          ref={panelRef}
+          aria-hidden={!active}
+          className={`grid transition-all duration-500 ease-in-out ${
+            active
+              ? 'grid-rows-[1fr] opacity-100'
+              : 'grid-rows-[0fr] opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="mt-6 rounded-[24px] border border-[#E6D8C8] bg-[#F7F4EF] p-6 md:p-8" dir="rtl">
+
+              {/* Coaching detail */}
+              {active === 'coaching' && (
+                <>
+                  <h3 className="mb-4 text-xl font-bold text-text-primary md:text-2xl">
+                    אימון אישי 1:1 — פרטים
+                  </h3>
+                  <div className="space-y-3">
+                    {coachingDetailParagraphs.map((p, i) => (
+                      <p key={i} className="text-text-secondary text-[14px] md:text-[15px] leading-8">{p}</p>
+                    ))}
+                  </div>
+                  <div className="mt-5 rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
+                    <p className="text-[14px] md:text-[15px] font-semibold text-text-primary mb-1">מבנה התהליך:</p>
+                    <p className="text-[14px] text-text-secondary">10 מפגשים שבועיים | כשעה כל מפגש</p>
+                    <p className="mt-3 text-[13px] text-text-secondary leading-6">
+                      פגישת ייעוץ ואבחון: 400 ₪ — מתקזזת במידה וממשיכים לתהליך.
+                    </p>
+                  </div>
+                  <a
+                    href={COACHING_WA_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840] md:w-auto md:px-8"
+                  >
+                    בדיקת התאמה לאימון אישי
+                  </a>
+                </>
+              )}
+
+              {/* Group coaching detail */}
+              {active === 'group' && (
+                <>
+                  <h3 className="mb-4 text-xl font-bold text-text-primary md:text-2xl">
+                    אימון קבוצתי — פרטים
+                  </h3>
+                  <div className="space-y-3">
+                    {groupCoachingDetailParagraphs.map((p, i) => (
+                      <p key={i} className="text-text-secondary text-[14px] md:text-[15px] leading-8">{p}</p>
+                    ))}
+                  </div>
+                  <div className="mt-5 rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
+                    <p className="text-[14px] md:text-[15px] font-semibold text-text-primary mb-2">מבנה התהליך:</p>
+                    <p className="text-[14px] text-text-secondary leading-7">
+                      8 מפגשים אונליין<br />
+                      קבוצה קטנה ואינטימית<br />
+                      תהליך חי ומונחה<br />
+                      עבודה עם דפוסים, קולות פנימיים, ערכים ובחירה
+                    </p>
+                    <p className="mt-3 text-[14px] md:text-[15px] font-semibold text-text-primary mb-1">עלות:</p>
+                    <p className="text-[14px] text-text-secondary">1,490 ₪ לתהליך</p>
+                  </div>
+                  <a
+                    href={GROUP_COACHING_WA_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840] md:w-auto md:px-8"
+                  >
+                    בדיקת התאמה לאימון קבוצתי
+                  </a>
+                </>
+              )}
+
+              {/* Breathwork detail */}
+              {active === 'breathwork' && (
+                <>
+                  <h3 className="mb-4 text-xl font-bold text-text-primary md:text-2xl">
+                    סדנאות נשימה / ריברסינג — פרטים
+                  </h3>
+                  <div className="space-y-3">
+                    {breathworkDetailParagraphs.map((p, i) => (
+                      <p key={i} className="text-text-secondary text-[14px] md:text-[15px] leading-8">{p}</p>
+                    ))}
+                  </div>
+                  <div className="mt-5 rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
+                    <p className="text-[14px] md:text-[15px] font-semibold text-text-primary mb-2">מבנה ועלות:</p>
+                    <p className="text-[14px] text-text-secondary leading-7">
+                      סדנה חד־פעמית / לפי מועד שמתפרסם מראש<br />
+                      נשימה מעגלית מונחית<br />
+                      מרחב קבוצתי בטוח ומוחזק<br />
+                      לעיתים בשילוב כלים משלימים כמו סאונד הילינג
+                    </p>
+                    <p className="mt-3 text-[14px] md:text-[15px] font-semibold text-text-primary mb-1">עלות:</p>
+                    <p className="text-[14px] text-text-secondary">
+                      עלות: 250–400 ₪ למשתתף, בהתאם לסוג הסדנה, מיקום, משך ותוכן נוסף.
+                    </p>
+                  </div>
+                  <a
+                    href={BREATHWORK_WA_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 flex w-full items-center justify-center rounded-xl bg-[#2F5A4F] px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-[#254840] md:w-auto md:px-8"
+                  >
+                    לקבלת פרטים על סדנת נשימה
+                  </a>
+                </>
+              )}
+
+              {/* Close button — bottom-left (visual) in RTL */}
+              <div className="mt-6 flex justify-end border-t border-[#E6D8C8] pt-5">
+                <button
+                  onClick={() => setActive(null)}
+                  className="rounded-xl border border-[#D1C9BB] px-5 py-2 text-sm font-medium text-[#6B7280] transition-colors duration-200 hover:border-[#183B3B] hover:text-[#183B3B]"
+                >
+                  סגור פרטים
+                </button>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 text-center">
