@@ -6,7 +6,11 @@ import { FaBars, FaTimes } from 'react-icons/fa'
 import { Button } from './ui/Button'
 import { copy, getWhatsAppLink, getCompatibilityLink, navItems } from '@/lib/constants'
 
-export const Hero = () => {
+interface HeroProps {
+  onServicesClick?: () => void
+}
+
+export const Hero = ({ onServicesClick }: HeroProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -89,7 +93,7 @@ export const Hero = () => {
               <Button
                 size="lg"
                 variant="secondary"
-                onClick={() => window.open(getWhatsAppLink(), "_blank")}
+                onClick={() => onServicesClick ? onServicesClick() : window.open(getWhatsAppLink(), '_blank')}
               >
                 {copy.heroCTASecondary}
               </Button>
@@ -127,7 +131,7 @@ export const Hero = () => {
         size="md"
         variant="secondary"
         className="w-full"
-        onClick={() => window.open(getWhatsAppLink(), "_blank")}
+        onClick={() => onServicesClick ? onServicesClick() : window.open(getWhatsAppLink(), '_blank')}
       >
         {copy.heroCTASecondary}
       </Button>

@@ -2,7 +2,7 @@ import { AboutGal } from '@/components/AboutGal'
 import { BenefitsSection } from '@/components/BenefitsSection'
 import { CTASection } from '@/components/CTASection'
 import { FAQSection } from '@/components/FAQSection'
-import { Hero } from '@/components/Hero'
+import { HeroWithServices } from '@/components/HeroWithServices'
 import { SectionNav } from '@/components/SectionNav'
 import { WhereChangeBegins } from '@/components/WhereChangeBegins'
 import { ProcessSection } from '@/components/ProcessSection'
@@ -14,7 +14,7 @@ import { Footer } from '@/components/Footer'
 export default function Home() {
   return (
     <main>
-      <Hero />
+      <HeroWithServices />
       <SectionNav />
       <WhereChangeBegins />
       <ProcessSection />
