@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { copy } from '@/lib/constants'
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
@@ -86,6 +87,10 @@ export const Footer = () => {
     {/* Copyright */}
     <div className="mt-8 border-t border-white/15 pt-5 text-center text-sm text-white/65">
       {copy.footerCopyright}
+      <span className="mx-2">·</span>
+      <Link href="/privacy" className="hover:text-white/90 underline underline-offset-2">
+        מדיניות פרטיות
+      </Link>
     </div>
   </div>
 </footer>
