@@ -2,6 +2,7 @@ import { AboutGal } from '@/components/AboutGal'
 import { BenefitsSection } from '@/components/BenefitsSection'
 import { CTASection } from '@/components/CTASection'
 import { FAQSection } from '@/components/FAQSection'
+import { FloatingNavButton } from '@/components/FloatingNavButton'
 import { HeroWithServices } from '@/components/HeroWithServices'
 import { SectionNav } from '@/components/SectionNav'
 import { WhereChangeBegins } from '@/components/WhereChangeBegins'
@@ -26,6 +27,7 @@ export default function Home() {
       <CTASection />
       <FAQSection />
       <Footer />
+      <FloatingNavButton />
     </main>
   )
 }

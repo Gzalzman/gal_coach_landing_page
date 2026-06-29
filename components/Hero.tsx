@@ -107,14 +107,14 @@ export const Hero = ({ onServicesClick }: HeroProps) => {
     <div className="relative mx-auto h-[205px] w-full overflow-hidden">
       <Image
         src="/images/me_mobile_banner.png"
-        alt="גל זלצמן - מאמן אישי מוסמך"
+        alt="גל זלצמן - מאמן מנטלי מוסמך"
         fill
         className="object-contain object-top"
         priority
       />
     </div>
 
-    <p className="mt-2 text-sm font-semibold text-accent-teal-dark">
+    <p className="mt-2 whitespace-pre-line text-sm font-semibold text-accent-teal-dark">
       {copy.heroEyebrow}
     </p>
 
