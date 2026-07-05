@@ -62,10 +62,10 @@ export const ServicesLayer = ({ isOpen, onClose }: ServicesLayerProps) => {
                   </p>
                   <div className="mt-auto border-t border-[#E8E3D8] pt-4">
                     <p className="text-right text-sm font-semibold text-[#183B3B]">
-                      עלות: 3,500 ₪ לתהליך המלא
+                      עלות: 2,900 ₪ לתהליך המלא
                     </p>
                     <p className="mt-1.5 text-right text-xs leading-snug text-[#6B7280]">
-                      פגישת ייעוץ ואבחון: 400 ₪ — מתקזזת במידה וממשיכים לתהליך.
+                      פגישת ייעוץ ואבחון: 350 ₪ — מתקזזת במידה וממשיכים לתהליך.
                     </p>
                   </div>
                   <Button
@@ -93,7 +93,7 @@ export const ServicesLayer = ({ isOpen, onClose }: ServicesLayerProps) => {
                   </p>
                   <div className="mt-auto border-t border-[#E8E3D8] pt-4">
                     <p className="text-right text-sm font-semibold text-[#183B3B]">
-                      עלות: 400 ₪ למפגש
+                      עלות: 300 ₪ למפגש
                     </p>
                   </div>
                   <Button
@@ -116,7 +116,7 @@ export const ServicesLayer = ({ isOpen, onClose }: ServicesLayerProps) => {
                   </p>
                   <div className="mt-auto border-t border-[#E8E3D8] pt-4">
                     <p className="text-right text-sm font-semibold text-[#183B3B]">
-                      עלות: 250–400 ₪ למשתתף
+                      עלות: 180–350 ₪ למשתתף
                     </p>
                   </div>
                   <Button
