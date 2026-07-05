@@ -187,7 +187,9 @@ export const WorkWithMe = () => {
                   </div>
                   <div className="mt-5 rounded-xl border border-[#E6D8C8] bg-white px-4 py-4">
                     <p className="text-[14px] md:text-[15px] font-semibold text-text-primary mb-1">מבנה התהליך:</p>
-                    <p className="text-[14px] text-text-secondary"> מפגשים שבועיים | כ 3 חודשים | רק <b> 2900 ש"ח</b> לתהליך </p>
+                    <p className="text-[14px] text-text-secondary">
+                      מפגשים שבועיים | כ־3 חודשים | רק <b>2,900 ₪</b> לתהליך
+                    </p>
                     <p className="mt-3 text-[13px] text-text-secondary leading-6">
                       פגישת ייעוץ ואבחון: 400 ₪ — מתקזזת במידה וממשיכים לתהליך.
                     </p>
