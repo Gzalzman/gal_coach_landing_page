@@ -11,11 +11,13 @@ import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { WorkWithMe } from '@/components/WorkWithMe'
 import { WordsFromTheWay } from '@/components/WordsFromTheWay'
 import { Footer } from '@/components/Footer'
+import { WorkshopTeaser } from '@/components/WorkshopTeaser'
 
 export default function Home() {
   return (
     <main>
       <HeroWithServices />
+      <WorkshopTeaser />
       <SectionNav />
       <WhereChangeBegins />
       <ProcessSection />

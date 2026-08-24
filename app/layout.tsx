@@ -5,6 +5,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'גל זלצמן | מאמן אישי קואקטיבי לתהליכי שינוי, תקיעות וקבלת החלטות',
   description: 'אימון אישי קואקטיבי עם גל זלצמן לאנשים שמרגישים תקועים, מתמודדים עם עומס או נמצאים בצומת החלטה. תהליך ממוקד ליצירת בהירות, בחירה ותנועה קדימה.',
+  verification: {
+    google: "buid3icVccyuDHxNRWWtiLuXaFA2XSZKri-obzyZ8FI",
+  },
   keywords: [
     'מאמן אישי',
     'מאמן אישי קואקטיבי',
@@ -12,13 +15,13 @@ export const metadata: Metadata = {
     'אימון אישי לשינוי',
     'אימון אישי לקבלת החלטות',
     'אימון אישי לתקיעות',
-    'קואצ׳ינג אישי'
+    'קואצ׳ינג'
   ],
   openGraph: {
     title: 'גל זלצמן | מאמן אישי קואקטיבי',
     description: 'אימון אישי ממוקד לאנשים שמרגישים תקועים, מתמודדים עם עומס או נמצאים בצומת החלטה.',
     type: 'website',
-    url: 'https://galzaltzman.co.il',
+    url: 'https://gz-coach.vercel.app/',
     siteName: 'גל זלצמן - מאמן אישי',
     locale: 'he_IL'
   },
