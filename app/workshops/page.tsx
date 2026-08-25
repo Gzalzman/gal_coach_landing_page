@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'סדנאות רברסינג — רגעים מהדרך | גל זלצמן',
   description:
     'תמונות ותגובות ממשתתפים בסדנאות רברסינג שהנחה גל זלצמן — מרחבים של נשימה, שחרור וחיבור פנימי.',
+  alternates: {
+    canonical: '/workshops',
+  },
 }
 
 const registrationLink = `https://wa.me/972528330884?text=${encodeURIComponent(

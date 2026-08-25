@@ -3,8 +3,12 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gz-coach.vercel.app'),
   title: 'גל זלצמן | מאמן אישי קואקטיבי לתהליכי שינוי, תקיעות וקבלת החלטות',
   description: 'אימון אישי קואקטיבי עם גל זלצמן לאנשים שמרגישים תקועים, מתמודדים עם עומס או נמצאים בצומת החלטה. תהליך ממוקד ליצירת בהירות, בחירה ותנועה קדימה.',
+  alternates: {
+    canonical: '/',
+  },
   verification: {
     google: "buid3icVccyuDHxNRWWtiLuXaFA2XSZKri-obzyZ8FI",
   },
@@ -25,7 +29,10 @@ export const metadata: Metadata = {
     siteName: 'גל זלצמן - מאמן אישי',
     locale: 'he_IL'
   },
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: '/favicon.ico'
   }
@@ -38,9 +45,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl">
-      <head>
-        <link rel="canonical" href="https://galzaltzman.co.il" />
-      </head>
       <body>{children}</body>
       <GoogleAnalytics gaId="G-2JWJBKS8GH" />
     </html>
