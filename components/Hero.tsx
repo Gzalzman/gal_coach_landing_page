@@ -51,7 +51,7 @@ export const Hero = ({ onServicesClick }: HeroProps) => {
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[72%] items-end justify-end md:flex">
             <Image
               src="/images/gz-desktop.png"
-              alt="גל זלצמן - מאמן אישי קואקטיבי"
+              alt="גל זלצמן - מאמן אישי ומנחה תהליכי שינוי"
               fill
               className="object-cover object-right-top"
               priority
@@ -107,7 +107,7 @@ export const Hero = ({ onServicesClick }: HeroProps) => {
     <div className="relative mx-auto h-[205px] w-full overflow-hidden">
       <Image
         src="/images/me_mobile_banner.png"
-        alt="גל זלצמן - מאמן מנטלי מוסמך"
+        alt="גל זלצמן - מאמן אישי ומנחה תהליכי שינוי"
         fill
         className="object-contain object-top"
         priority
